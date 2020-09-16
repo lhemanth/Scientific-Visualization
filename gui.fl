@@ -1,0 +1,118 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cpp}
+class Gui {open
+} {
+  Function {Gui()} {open
+  } {
+    Fl_Window MainWindow {
+      label {Scientific Visualization Projects} open
+      xywh {373 205 985 555} type Double hide
+      code0 {\#include "Application.h"}
+      code1 {\#include <stdlib.h>}
+    } {
+      Fl_Menu_Bar menuBar {
+        label menuBar open
+        xywh {0 0 985 25}
+      } {
+        Submenu fileMenu {
+          label File open
+          xywh {0 0 100 20}
+        } {
+          MenuItem readFile {
+            label Read
+            callback {app->ReadFile();}
+            xywh {0 0 100 20}
+          }
+          MenuItem writeFile {
+            label Write
+            callback {app->WriteFile();}
+            xywh {0 0 100 20}
+          }
+        }
+        MenuItem exitButton {
+          label Exit
+          callback {exit(1);}
+          xywh {10 10 100 20} labelcolor 1
+        }
+        Submenu imageProcessing {
+          label {Image Processing} open
+          xywh {0 0 62 20}
+        } {
+          MenuItem updateImage {
+            label Update
+            callback {app->updateImage();}
+            xywh {0 0 30 20}
+          }
+          MenuItem averageSmoothing {
+            label {Average Smooth}
+            callback {app->averageSmoothing();}
+            xywh {0 0 30 20}
+          }
+          MenuItem medianSmoothing {
+            label {Median Smooth}
+            callback {app->medianSmoothing();}
+            xywh {0 0 30 20}
+          }
+          MenuItem gaussianSmooth {
+            label {Gaussian Smooth}
+            callback {app->gaussianSmooth();}
+            xywh {0 0 30 20}
+          }
+          MenuItem edgeDetection {
+            label {Edge Detection}
+            callback {app->edgeDetection();}
+            xywh {0 0 30 20}
+          }
+          MenuItem undo {
+            label Undo
+            callback {app->undo();}
+            xywh {0 0 30 20}
+          }
+        }
+        Submenu volumeRendering {
+          label {Volume Rendering} open
+          xywh {0 0 62 20}
+        } {
+          MenuItem readVolumeFile {
+            label {Read Volume File}
+            callback {app->readVolumeFile();} selected
+            xywh {0 0 30 20}
+          }
+          MenuItem {X - ray} {
+            label {X-Ray}
+            callback {app->xRay();}
+            xywh {0 0 30 20}
+          }
+          MenuItem MIP {
+            label MIP
+            callback {app->mip();}
+            xywh {0 0 30 20}
+          }
+        }
+      }
+      Fl_Box EditorWindow {
+        label EditorWindow
+        xywh {15 25 385 350}
+        code0 {\#include "EditorWindow.h"}
+        class CEditorWindow
+      }
+      Fl_Box DisplayWindow {
+        label DisplayWindow
+        xywh {415 25 570 530}
+        code0 {\#include "DisplayWindow.h"}
+        class CDisplayWindow
+      }
+    }
+    code {app=new Application();} {}
+  }
+  Function {show()} {open
+  } {
+    code {MainWindow->show();
+EditorWindow->show();
+DisplayWindow->show();} {}
+  }
+  decl {Application *app;} {public local
+  }
+}
